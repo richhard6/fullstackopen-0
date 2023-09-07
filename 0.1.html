@@ -1,9 +1,43 @@
 <body>
   <pre class="mermaid">
-        graph TD 
-        A[Client] --> B[Load Balancer] 
-        B --> C[Server01] 
-        B --> D[Server02]
+    sequenceDiagram
+    participant browser
+    participant server
+    Note right of browser: The user writes something in the input box and clicks send
+
+    browser->>server: POST https://fullstack.exampleapp.herokuapp.com/new_note
+    Note right of browser: note is added in the server database
+
+    activate server
+    server-->>browser: HTTP status code 302 URL redirect
+    deactivate server
+
+
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the javascript file
+    deactivate server
+
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: JSON file with the new added note [{"content":"hey!", "date":"2023-07-9"}]
+    deactivate server
+
+    Note right of browser: The browser executes the callback function that re renders the website with the new note
+
   </pre>
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
