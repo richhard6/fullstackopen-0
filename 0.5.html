@@ -1,25 +1,36 @@
 <body>
   <pre class="mermaid">
-      sequenceDiagram
-      participant browser
-      participant server
-      Note right of browser: The user writes something in the input box and clicks send, as our javascript code is preventing the default behaviour of the form, the website doesn't reload 
-      Note right of browser: Our javascript code pushes the new added note to the notes array.  
-      Note right of browser: Our javascript code rerenders the note list with the new note. 
-  
-      browser->>server: POST https://fullstack.exampleapp.herokuapp.com/new_note_spa
-      Note right of browser: note is added in the server database
-  
-      activate server
-      server-->>browser: HTTP status code 201 created
-      deactivate server
-  
-      Note right of browser: the new note is in the database and previously rendered in the website
-  
-  
-      
-  
-    </pre
+    sequenceDiagram
+    participant browser
+    participant server
+
+
+    Note right of browser: I believe that the process of entering into the website is the same as the not SPA website because there are not more views or pages than the current one and when it differs is when a note is created 
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server and adds an event handler to the form listening for the submit event to execute sending the data to the server, adding the note to the notes array and redrawing the notes.
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    deactivate server
+
+ Note right of browser: The browser executes the redraw function and draw all the notes. (this function will be executed everytime a note is created).
+</pre
   >
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
