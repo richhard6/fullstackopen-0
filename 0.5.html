@@ -22,11 +22,11 @@
     server-->>browser: the JavaScript file
     deactivate server
 
-    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server and adds an event handler to the form listening for the submit event to execute sending the data to the server, adding the note to the notes array and redrawing the notes.
+    Note right of browser: The browser executes the JavaScript code that fetches the JSON from the server and adds an event handler to the form listening for the submit event to execute sending the data to the server, adding the note to the notes array and redrawing the notes.
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
-    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    server-->>browser: [{ "content": "SPA the best", "date": "2023-8-9" }, ... ]
     deactivate server
 
  Note right of browser: The browser executes the redraw function and draw all the notes. (this function will be executed everytime a note is created).
